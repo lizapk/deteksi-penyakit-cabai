@@ -1,6 +1,6 @@
 import streamlit as st
 import tensorflow as tf
-#from tensorflow import keras
+from tensorflow import keras
 import random
 from PIL import Image, ImageOps
 import numpy as np
@@ -8,10 +8,8 @@ import numpy as np
 import warnings
 warnings.filterwarnings("ignore")
 
-
 st.set_page_config(
     page_title="Deteksi Penyakit Cabai",
-    page_icon = ":mango:",
     initial_sidebar_state = 'auto'
 )
 hide_streamlit_style = """
@@ -25,16 +23,12 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 def prediction_cls(prediction):
     for key, clss in class_names.items():
         if np.argmax(prediction)==clss:
-            
             return key
-
 
 with st.sidebar:
         st.image('cara_budidaya_cabe.jpg')
         st.title("Cabai Merah")
-        st.subheader("Membantu kamu dalam klasifikasi penyakit cabai")
-
-             
+        st.subheader("Membantu kamu dalam klasifikasi penyakit cabai")         
         
 def prediction_cls(prediction):
     for key, clss in class_names.items():
@@ -42,21 +36,16 @@ def prediction_cls(prediction):
             
             return key
         
-       
-
-    
-
 st.set_option('deprecation.showfileUploaderEncoding', False)
 @st.cache(allow_output_mutation=True)
 def load_model():
-    model=tf.keras.models.load_model('E:\RPS PCD\TUGAS AKHIR\Chili_Plant_Disease\model.h5')
+    model=tf.keras.models.load_model('model.h5')
     return model
 with st.spinner('Model is being loaded..'):
     model=load_model()
     #model = keras.Sequential()
     #model.add(keras.layers.Input(shape=(224, 224, 4)))
     
-
 st.write("""
          # Deteksi penyakit cabai mu
          """
@@ -70,7 +59,6 @@ def import_and_predict(image_data, model):
         img_reshape = img[np.newaxis,...]
         prediction = model.predict(img_reshape)
         return prediction
-
         
 if file is None:
     st.text("Please upload an image file")
