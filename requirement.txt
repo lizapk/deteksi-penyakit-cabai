@@ -1,9 +1,5 @@
 streamlit
-numpy
+tensorflow==2.15.0
 Pillow
-keras
-pandas
-seaborn
-matplotlib
-tensorflow
-scikit-learn
+numpy
+protobuf
